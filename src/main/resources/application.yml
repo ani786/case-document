@@ -1,0 +1,96 @@
+server:
+  servlet:
+    context-path: /portal-internal/api/case-document
+  http2:
+    enabled: true
+  port: 7019
+spring:
+  application:
+    name: case-document-service
+  main:
+    lazy-initialization: true
+    banner-mode: off
+  codec:
+    max-in-memory-size: 5000000
+  datasource:
+    url: jdbc:oracle:thin:@service-non-prod-itsdev.c7hrloe7gir6.ap-southeast-2.rds.amazonaws.com:1525/itsdev
+    username: ITSDQM
+    password: 2C5YV8BC
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      schema: ITSDBA
+      maximum-pool-size: 1
+      idle-timeout: 10000
+      minimum-idle: 1
+  sql:
+    init:
+      platform: oracle
+      mode: never
+xray:
+  tracing:
+    name: case-document-service
+api:
+  c-api:
+    runnableScript: /api/webexes/webapi_3.1.1t
+    connection:
+      timeout: 300
+      threadpool: 10
+      clientCode: connexus
+      port: 22802
+      remoteUser: lpi
+security:
+  permissions: "default"
+  enabled: "false"
+origin:
+  allowed: https://staffconnect-dev.nswlrs.com.au
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+api:
+  c-api:
+    runnableScript: /api/webexes/webapi_3.1.1t
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:oracle:thin:@service-non-prod-itsdev.c7hrloe7gir6.ap-southeast-2.rds.amazonaws.com:1525/itsdev
+    username: ITSDQM
+    password: 2C5YV8BC
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      schema: ITSDBA
+  sql:
+    init:
+      platform: oracle
+      mode: never
+origin:
+  allowed: https://staffconnect-test.nswlrs.com.au
+---
+spring:
+  config:
+    activate:
+      on-profile: qa
+  datasource:
+    url: jdbc:oracle:thin:@service-non-prod-itsjit.c7hrloe7gir6.ap-southeast-2.rds.amazonaws.com:1525/itsjit
+    username: ITSDQM
+    password: R2BGER5J
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      schema: ITSDBA
+  sql:
+    init:
+      platform: oracle
+      mode: never
+origin:
+  allowed: https://staffconnect-uat.nswlrs.com.au
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+origin:
+  allowed: https://staffconnect.nswlrs.com.au

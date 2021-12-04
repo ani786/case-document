@@ -1,0 +1,231 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'application'
+    id 'checkstyle'
+    id 'io.qameta.allure' version '2.8.1'
+    id 'com.palantir.docker' version '0.25.0'
+    id 'maven-publish'
+    id 'org.sonarqube' version '3.0'
+    id 'net.researchgate.release' version '2.8.1'
+}
+
+group = 'com.nswlrs.api.portal.internal.casedocumentservice'
+
+java {
+    sourceCompatibility(JavaVersion.VERSION_15)
+}
+
+configurations {
+    [apiElements, runtimeElements].each {
+        it.outgoing.artifacts.removeIf { it.buildDependencies.getDependencies(null).contains(jar) }
+        it.outgoing.artifact(bootJar)
+    }
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    testAnnotationProcessor.extendsFrom testImplementation
+}
+
+repositories {
+    maven {
+        allowInsecureProtocol = true
+        url("http://nexus.ba-build.aws.trs:8081/repository/maven-central/")
+        credentials {
+            username System.getenv('bamboo_nexus_username')
+            password System.getenv('bamboo_nexus_password')
+        }
+    }
+
+    maven {
+        allowInsecureProtocol = true
+        url("http://nexus.ba-build.aws.trs:8081/repository/releases/")
+        credentials {
+            username System.getenv('bamboo_nexus_username')
+            password System.getenv('bamboo_nexus_password')
+        }
+    }
+}
+
+ext {
+    set('allureVersion', '2.13.2')
+    set('jacksonDataBindVersion', '2.13.0-rc1')
+    set('jacksonAnnotationsVersion', '2.13.0-rc1')
+    set('jacksonCoreVersion', '2.13.0-rc1')
+    set('commonService', '0.1.63')
+    set('springDocOpenAPI', '1.5.7')
+    set('springCloudVersion', "2020.0.4")
+    set('jacksonXmlFormatVersion', '2.13.0-rc2')
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonDataBindVersion"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonAnnotationsVersion"
+    implementation "com.fasterxml.jackson.core:jackson-core:$jacksonCoreVersion"
+    implementation "com.nswlrs.api.common.commonservice:common-service:$commonService"
+    implementation "org.springdoc:springdoc-openapi-ui:$springDocOpenAPI"
+    implementation 'com.amazonaws:aws-xray-recorder-sdk-spring:2.9.0'
+    implementation 'org.apache.commons:commons-collections4:4.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonXmlFormatVersion"
+    implementation 'commons-io:commons-io:2.11.0'
+    /*implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.0.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws-parameter-store-config:2.2.6.RELEASE'*/
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.projectlombok:lombok'
+    testImplementation "io.qameta.allure:allure-junit5:${allureVersion}"
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+allure {
+    autoconfigure = true
+    version = '2.13.2'
+    autoconfigure = true
+    aspectjweaver = true
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+task unpack(type: Copy) {
+    dependsOn bootJar
+    from(zipTree(tasks.bootJar.outputs.files.singleFile))
+    into("build/dependency")
+}
+
+docker {
+    dependsOn unpack
+    def dockerName = "${System.getenv("bamboo_custom_aws_ecr_proxyEndpointDomain") ? System.getenv("bamboo_custom_aws_ecr_proxyEndpointDomain") : group}/${rootProject.name}"
+    if (project.hasProperty("env")) {
+        name "${dockerName}-${env}"
+        tag "-latest", "${dockerName}-${env}:latest"
+        tag "bambooBuidNumber", "${dockerName}-${env}:${System.getenv("bamboo_buildNumber")}"
+        tag "-${version}", "${dockerName}-${env}:v${version}"
+    } else {
+        name "${dockerName}"
+        tag "-latest", "${dockerName}:latest"
+        tag "bambooBuidNumber", "${dockerName}:${System.getenv("bamboo_buildNumber")}"
+        tag "-${version}", "${dockerName}:v${version}"
+    }
+    copySpec.from(tasks.unpack.outputs).into("dependency")
+    buildArgs(['DEPENDENCY': "dependency"])
+}
+
+test {
+    systemProperties = [
+            'junit.jupiter.execution.parallel.enabled'             : 'true',
+            'junit.jupiter.execution.parallel.mode.default'        : 'concurrent',
+            'junit.jupiter.execution.parallel.mode.classes.default': 'concurrent'
+    ]
+    useJUnitPlatform {
+        excludeTags 'integration', 'regression'
+    }
+    testLogging {
+        events 'PASSED', 'FAILED', 'SKIPPED'
+    }
+}
+
+task integrationTest(type: Test) {
+    systemProperties = [
+            'junit.jupiter.execution.parallel.enabled'             : 'true',
+            'junit.jupiter.execution.parallel.mode.default'        : 'concurrent',
+            'junit.jupiter.execution.parallel.mode.classes.default': 'concurrent'
+    ]
+    useJUnitPlatform {
+        includeTags 'integration'
+    }
+
+    shouldRunAfter test
+    testLogging {
+        events 'PASSED', 'FAILED', 'SKIPPED'
+    }
+}
+
+checkstyleMain {
+    source = 'src/main/java'
+}
+
+checkstyleTest {
+    source = 'src/test/java'
+}
+
+//add this to exclude the checkstyle from build task
+checkstyle {
+    toolVersion '8.42'
+    //checkstyleTest.enabled = false
+}
+
+springBoot {
+    buildInfo()
+}
+
+publishing {
+
+    publications {
+        binary(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            allowInsecureProtocol = true
+            credentials {
+                username System.getenv('bamboo_nexus_username')
+                password System.getenv('bamboo_nexus_password')
+            }
+            url = version.endsWith('SNAPSHOT')
+                    ? System.getenv('bamboo_nexus_snapshot_url')
+                    : System.getenv('bamboo_nexus_release_url')
+        }
+    }
+}
+
+release {
+    tagTemplate = 'v${version}'
+    versionPropertyFile = 'gradle.properties'
+    preTagCommitMessage = System.getenv('bamboo_default_preTagCommitMessage')
+    tagCommitMessage = System.getenv('bamboo_default_tagCommitMessage')
+    newVersionCommitMessage = System.getenv('bamboo_default_newVersionCommitMessage')
+    git {
+        requireBranch = 'release'
+    }
+}
+beforeReleaseBuild.dependsOn tasks.test
+afterReleaseBuild.dependsOn tasks.publish
+
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Xlint:preview"
+    }
+}
+
+mainClassName = 'com.nswlrs.api.portal.internal.casedocumentservice.CaseDocumentServiceApplication'

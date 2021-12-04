@@ -1,0 +1,12 @@
+aws:
+  paramstore:
+    enabled: true
+    name: case-user-service
+    prefix: /dtp
+    profile-separator: '_'
+    region: ap-southeast-2
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
