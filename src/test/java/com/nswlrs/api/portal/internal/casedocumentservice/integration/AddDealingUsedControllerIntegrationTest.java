@@ -1,12 +1,12 @@
-package com.nswlrs.api.portal.internal.casedocumentservice.integration;
+package com.mydocumentsref.api.portal.internal.casedocumentservice.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Collections;
 
-import com.nswlrs.api.common.commonservice.util.Constants;
-import com.nswlrs.api.portal.internal.casedocumentservice.config.IntegrationTest;
-import com.nswlrs.api.portal.internal.casedocumentservice.services.output.AddDealingUsedResponse;
+import com.mydocumentsref.api.common.commonservice.util.Constants;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.config.IntegrationTest;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.services.output.AddDealingUsedResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;

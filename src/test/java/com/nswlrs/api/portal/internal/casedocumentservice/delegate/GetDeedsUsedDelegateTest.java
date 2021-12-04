@@ -1,4 +1,4 @@
-package com.nswlrs.api.portal.internal.casedocumentservice.delegate;
+package com.mydocumentsref.api.portal.internal.casedocumentservice.delegate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -8,8 +8,8 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
-import com.nswlrs.api.portal.internal.casedocumentservice.model.DeedUsed;
-import com.nswlrs.api.portal.internal.casedocumentservice.repository.GetDeedsUsedJDBCRepository;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.model.DeedUsed;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.repository.GetDeedsUsedJDBCRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

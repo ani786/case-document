@@ -1,9 +1,9 @@
-package com.nswlrs.api.portal.internal.casedocumentservice.services;
+package com.mydocumentsref.api.portal.internal.casedocumentservice.services;
 
 import javax.validation.Valid;
 
-import com.nswlrs.api.portal.internal.casedocumentservice.delegate.GetFormattedTitleSearchDelegate;
-import com.nswlrs.api.portal.internal.casedocumentservice.services.input.FormattedTitleSearchRequest;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.delegate.GetFormattedTitleSearchDelegate;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.services.input.FormattedTitleSearchRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;

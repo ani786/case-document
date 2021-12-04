@@ -1,4 +1,4 @@
-package com.nswlrs.api.portal.internal.casedocumentservice.delegate;
+package com.mydocumentsref.api.portal.internal.casedocumentservice.delegate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nswlrs.api.common.commonservice.util.DateUtils;
-import com.nswlrs.api.portal.internal.casedocumentservice.repository.LodgedDocumentRepository;
-import com.nswlrs.api.portal.internal.casedocumentservice.services.output.LodgedDocument;
-import com.nswlrs.api.portal.internal.casedocumentservice.services.output.LodgedDocumentResponse;
+import com.mydocumentsref.api.common.commonservice.util.DateUtils;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.repository.LodgedDocumentRepository;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.services.output.LodgedDocument;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.services.output.LodgedDocumentResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

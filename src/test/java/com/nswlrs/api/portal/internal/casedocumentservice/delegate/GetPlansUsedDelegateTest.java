@@ -1,12 +1,12 @@
-package com.nswlrs.api.portal.internal.casedocumentservice.delegate;
+package com.mydocumentsref.api.portal.internal.casedocumentservice.delegate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import com.nswlrs.api.common.commonservice.capi.facade.WebApiFacade;
-import com.nswlrs.api.portal.internal.casedocumentservice.repository.GetPlansUsedJDBCRepository;
-import com.nswlrs.api.portal.internal.casedocumentservice.services.input.PlansUsedRequest;
+import com.mydocumentsref.api.common.commonservice.capi.facade.WebApiFacade;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.repository.GetPlansUsedJDBCRepository;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.services.input.PlansUsedRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

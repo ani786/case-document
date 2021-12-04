@@ -1,4 +1,4 @@
-package com.nswlrs.api.portal.internal.casedocumentservice.delegate;
+package com.mydocumentsref.api.portal.internal.casedocumentservice.delegate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.nswlrs.api.common.commonservice.capi.facade.WebApiFacade;
-import com.nswlrs.api.portal.internal.casedocumentservice.model.SearchPlanUsed;
-import com.nswlrs.api.portal.internal.casedocumentservice.repository.GetFormattedTitleSearchJDBCRepository;
-import com.nswlrs.api.portal.internal.casedocumentservice.services.output.GetSearchPlansUsedResponse;
+import com.mydocumentsref.api.common.commonservice.capi.facade.WebApiFacade;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.model.SearchPlanUsed;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.repository.GetFormattedTitleSearchJDBCRepository;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.services.output.GetSearchPlansUsedResponse;
 import org.apache.commons.lang3.ObjectUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

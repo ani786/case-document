@@ -10,7 +10,7 @@ plugins {
     id 'net.researchgate.release' version '2.8.1'
 }
 
-group = 'com.nswlrs.api.portal.internal.casedocumentservice'
+group = 'com.mydocumentsref.api.portal.internal.casedocumentservice'
 
 java {
     sourceCompatibility(JavaVersion.VERSION_15)
@@ -70,7 +70,7 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonDataBindVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonAnnotationsVersion"
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonCoreVersion"
-    implementation "com.nswlrs.api.common.commonservice:common-service:$commonService"
+    implementation "com.mydocumentsref.api.common.commonservice:common-service:$commonService"
     implementation "org.springdoc:springdoc-openapi-ui:$springDocOpenAPI"
     implementation 'com.amazonaws:aws-xray-recorder-sdk-spring:2.9.0'
     implementation 'org.apache.commons:commons-collections4:4.1'
@@ -228,4 +228,4 @@ gradle.projectsEvaluated {
     }
 }
 
-mainClassName = 'com.nswlrs.api.portal.internal.casedocumentservice.CaseDocumentServiceApplication'
+mainClassName = 'com.mydocumentsref.api.portal.internal.casedocumentservice.CaseDocumentServiceApplication'

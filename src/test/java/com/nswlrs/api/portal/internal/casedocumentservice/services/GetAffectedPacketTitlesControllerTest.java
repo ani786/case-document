@@ -1,4 +1,4 @@
-package com.nswlrs.api.portal.internal.casedocumentservice.services;
+package com.mydocumentsref.api.portal.internal.casedocumentservice.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -8,9 +8,9 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
-import com.nswlrs.api.portal.internal.casedocumentservice.delegate.GetAffectedPacketTitlesDelegate;
-import com.nswlrs.api.portal.internal.casedocumentservice.model.AffectedPacketTitle;
-import com.nswlrs.api.portal.internal.casedocumentservice.services.output.GetAffectedPacketTitlesResponse;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.delegate.GetAffectedPacketTitlesDelegate;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.model.AffectedPacketTitle;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.services.output.GetAffectedPacketTitlesResponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.nswlrs.api.portal.internal.casedocumentservice.config;
+package com.mydocumentsref.api.portal.internal.casedocumentservice.config;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

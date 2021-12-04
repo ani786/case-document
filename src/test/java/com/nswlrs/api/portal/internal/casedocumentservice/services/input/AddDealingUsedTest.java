@@ -1,4 +1,4 @@
-package com.nswlrs.api.portal.internal.casedocumentservice.services.input;
+package com.mydocumentsref.api.portal.internal.casedocumentservice.services.input;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

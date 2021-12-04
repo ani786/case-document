@@ -1,4 +1,4 @@
-package com.nswlrs.api.portal.internal.casedocumentservice.repository;
+package com.mydocumentsref.api.portal.internal.casedocumentservice.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nswlrs.api.portal.internal.casedocumentservice.model.UnregisteredDocument;
+import com.mydocumentsref.api.portal.internal.casedocumentservice.model.UnregisteredDocument;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

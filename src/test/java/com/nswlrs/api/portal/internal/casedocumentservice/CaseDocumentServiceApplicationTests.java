@@ -1,4 +1,4 @@
-package com.nswlrs.api.portal.internal.casedocumentservice;
+package com.mydocumentsref.api.portal.internal.casedocumentservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

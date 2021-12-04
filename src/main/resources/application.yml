@@ -42,7 +42,7 @@ security:
   permissions: "default"
   enabled: "false"
 origin:
-  allowed: https://staffconnect-dev.nswlrs.com.au
+  allowed: https://staffconnect-dev.mydocumentsref.com.au
 ---
 spring:
   config:
@@ -68,7 +68,7 @@ spring:
       platform: oracle
       mode: never
 origin:
-  allowed: https://staffconnect-test.nswlrs.com.au
+  allowed: https://staffconnect-test.mydocumentsref.com.au
 ---
 spring:
   config:
@@ -86,11 +86,11 @@ spring:
       platform: oracle
       mode: never
 origin:
-  allowed: https://staffconnect-uat.nswlrs.com.au
+  allowed: https://staffconnect-uat.mydocumentsref.com.au
 ---
 spring:
   config:
     activate:
       on-profile: prod
 origin:
-  allowed: https://staffconnect.nswlrs.com.au
+  allowed: https://staffconnect.mydocumentsref.com.au

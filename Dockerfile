@@ -7,4 +7,4 @@ COPY ${DEPENDENCY}/BOOT-INF/classes /
 COPY ${DEPENDENCY}/BOOT-INF/classes/api /api
 RUN chmod -R 777 /api
 ENV TZ=Australia/Sydney
-ENTRYPOINT ["java","-cp",":lib/*","com.nswlrs.api.portal.internal.casedocumentservice.CaseDocumentServiceApplication"]
+ENTRYPOINT ["java","-cp",":lib/*","com.mydocumentsref.api.portal.internal.casedocumentservice.CaseDocumentServiceApplication"]
