@@ -7,5 +7,5 @@
       Skip all checks on files in package 'foo' in folder 'src/main/java',
       and ensure the regex is compatible to different OS.
      -->
-    <suppress checks="." files="src[\\/]main[\\/]java[\\/]com[\\/]nswlrs[\\/]api[\\/]portal[\\/]internal[\\/]casedocumentservice[\\/]repository[\\/]statement[\\/]LodgedDocumentListStatement\.java"/>
+    <suppress checks="." files="src[\\/]main[\\/]java[\\/]com[\\/]mydocumentsref.[\\/]api[\\/]portal[\\/]internal[\\/]casedocumentservice[\\/]repository[\\/]statement[\\/]LodgedDocumentListStatement\.java"/>
 </suppressions>

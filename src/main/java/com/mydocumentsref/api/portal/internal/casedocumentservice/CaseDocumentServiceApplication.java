@@ -10,7 +10,7 @@ import org.springframework.context.annotation.FilterType;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {
-            "com.mydocumentsref.api"}, excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.nswlrs" +
+            "com.mydocumentsref.api"}, excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.mydocumentsref." +
             ".api.common.commonservice.external.*"))
 public class CaseDocumentServiceApplication {
 
